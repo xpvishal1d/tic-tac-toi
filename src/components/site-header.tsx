@@ -22,6 +22,12 @@ export function SiteHeader({ user }: SiteHeaderProps) {
 
       <nav className="flex flex-wrap items-center justify-end gap-3">
         <Link
+          href="/time"
+          className="rounded-full border border-white/60 bg-white/70 px-4 py-2 text-sm font-semibold text-deep-space-blue transition hover:border-cerulean hover:text-cerulean"
+        >
+          Timer
+        </Link>
+        <Link
           href="/play"
           className="rounded-full border border-white/60 bg-white/70 px-4 py-2 text-sm font-semibold text-deep-space-blue transition hover:border-cerulean hover:text-cerulean"
         >

@@ -62,8 +62,13 @@ export function getPoolConfig(connectionString: string): PoolConfig {
     .toString()
     .replace(/^postgresql:\/\//, "postgres://");
 
+  const isServerless = Boolean(process.env.VERCEL);
+
   return {
     connectionString: connectionStringWithoutSslParams,
     ssl: needsSsl ? { rejectUnauthorized: false } : undefined,
+    max: isServerless ? 1 : 10,
+    idleTimeoutMillis: isServerless ? 5_000 : 30_000,
+    connectionTimeoutMillis: 15_000,
   };
 }

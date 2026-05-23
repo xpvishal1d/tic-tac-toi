@@ -2,6 +2,8 @@ import { SiteHeader } from "@/components/site-header";
 import { getAdminStats } from "@/lib/data";
 import { requireAdmin } from "@/lib/session";
 
+export const dynamic = "force-dynamic";
+
 export default async function AdminPage() {
   const user = await requireAdmin();
   const stats = await getAdminStats();

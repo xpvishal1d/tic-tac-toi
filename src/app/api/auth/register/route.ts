@@ -13,6 +13,7 @@ import {
 import { getValidationError, registerSchema } from "@/lib/validators";
 
 export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
 export async function POST(request: Request) {
   const payload = await request.json().catch(() => null);

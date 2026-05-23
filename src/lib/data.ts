@@ -2,12 +2,12 @@ import { desc, eq, sql } from "drizzle-orm";
 
 import { db } from "@/lib/db";
 import { games, users } from "@/lib/db/schema";
-import { env } from "@/lib/env";
+import { getEnv } from "@/lib/env";
 import { hashPassword } from "@/lib/auth";
 
 export async function ensureAdminUser() {
   const existingAdmin = await db.query.users.findFirst({
-    where: eq(users.email, env.ADMIN_EMAIL),
+    where: eq(users.email, getEnv().ADMIN_EMAIL),
   });
 
   if (existingAdmin) {
@@ -17,9 +17,9 @@ export async function ensureAdminUser() {
   const [admin] = await db
     .insert(users)
     .values({
-      name: env.ADMIN_NAME,
-      email: env.ADMIN_EMAIL,
-      passwordHash: await hashPassword(env.ADMIN_PASSWORD),
+      name: getEnv().ADMIN_NAME,
+      email: getEnv().ADMIN_EMAIL,
+      passwordHash: await hashPassword(getEnv().ADMIN_PASSWORD),
       role: "admin",
     })
     .returning();

@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
-import { env } from "@/lib/env";
+import { getEnv } from "@/lib/env";
 import type { User } from "@/lib/db/schema";
 
 export type AuthUser = Pick<User, "id" | "name" | "email" | "role">;
@@ -35,9 +35,9 @@ export function toAuthUser(user: User): AuthUser {
 }
 
 export function signToken(user: AuthUser) {
-  return jwt.sign(user, env.JWT_SECRET, { expiresIn: `${SESSION_MAX_AGE}s` });
+  return jwt.sign(user, getEnv().JWT_SECRET, { expiresIn: `${SESSION_MAX_AGE}s` });
 }
 
 export function verifyToken(token: string) {
-  return jwt.verify(token, env.JWT_SECRET) as AuthUser;
+  return jwt.verify(token, getEnv().JWT_SECRET) as AuthUser;
 }

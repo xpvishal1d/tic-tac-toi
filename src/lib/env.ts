@@ -24,4 +24,14 @@ const envSchema = z.object({
   ADMIN_PASSWORD: z.string().min(6),
 });
 
-export const env = envSchema.parse(process.env);
+export type Env = z.infer<typeof envSchema>;
+
+let cachedEnv: Env | null = null;
+
+export function getEnv(): Env {
+  if (!cachedEnv) {
+    cachedEnv = envSchema.parse(process.env);
+  }
+
+  return cachedEnv;
+}

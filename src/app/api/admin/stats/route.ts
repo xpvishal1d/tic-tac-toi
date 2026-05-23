@@ -4,6 +4,7 @@ import { getAdminStats } from "@/lib/data";
 import { getCurrentUser } from "@/lib/session";
 
 export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
 export async function GET() {
   const user = await getCurrentUser();

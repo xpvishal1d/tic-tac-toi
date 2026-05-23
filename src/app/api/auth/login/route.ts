@@ -14,6 +14,7 @@ import { ensureAdminUser } from "@/lib/data";
 import { getValidationError, loginSchema } from "@/lib/validators";
 
 export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
 export async function POST(request: Request) {
   await ensureAdminUser();
